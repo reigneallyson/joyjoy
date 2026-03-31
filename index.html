@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>For April Joy 🌹</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #faf7f2;
+      --warm: #f0e8dc;
+      --blush: #e8c4b0;
+      --rose: #c97a68;
+      --deep: #2a1f1a;
+      --mid: #7a5a50;
+      --muted: #b89a8e;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--cream);
+      color: var(--deep);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* ── LOCK SCREEN ── */
+    #lockScreen {
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      background: #180d09;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    #lockScreen.unlocking { animation: lockFade 1.4s ease forwards; }
+
+    @keyframes lockFade {
+      0%   { opacity: 1; }
+      60%  { opacity: 1; }
+      100% { opacity: 0; pointer-events: none; }
+    }
+
+    .lock-petals { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+
+    .lock-petal {
+      position: absolute;
+      border-radius: 50% 0 50% 0;
+      opacity: 0;
+      animation: driftDark linear infinite;
+    }
+
+    @keyframes driftDark {
+      0%   { transform: translateY(-60px) rotate(0deg);   opacity: 0; }
+      5%   { opacity: 0.18; }
+      95%  { opacity: 0.07; }
+      100% { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+    }
+
+    .lock-eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: #7a4838;
+      margin-bottom: 2rem;
+      animation: fadeUp 0.8s ease 0.3s both;
+    }
+
+    .lock-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(3.2rem, 13vw, 7.5rem);
+      line-height: 0.92;
+      color: #f0e4da;
+      animation: fadeUp 1s ease 0.5s both;
+    }
+
+    .lock-name span { display: block; font-style: italic; color: var(--rose); }
+
+    .lock-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 1.1rem;
+      color: #5a3c34;
+      margin-top: 1.2rem;
+      animation: fadeUp 1s ease 0.8s both;
+    }
+
+    .lock-countdown {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 1.2rem;
+      margin-top: 3rem;
+      flex-wrap: wrap;
+      animation: fadeUp 1s ease 1s both;
+    }
+
+    .lc-unit { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+
+    .lc-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 9vw, 5.2rem);
+      font-weight: 300;
+      color: #f0e4da;
+      line-height: 1;
+      min-width: 2ch;
+      text-align: center;
+    }
+
+    .lc-label { font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase; color: #5a3c34; }
+
+    .lc-dot {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 3.2rem;
+      color: #3a1e16;
+      line-height: 1;
+      margin-top: 0.15em;
+    }
+
+    .lock-hint {
+      margin-top: 1.8rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #4a2d24;
+      animation: fadeUp 1s ease 1.1s both;
+    }
+
+    #unlockBtn {
+      display: none;
+      margin-top: 2.5rem;
+      padding: 0.9rem 2.8rem;
+      border: 1px solid var(--rose);
+      border-radius: 2px;
+      background: transparent;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-style: italic;
+      color: var(--rose);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.3s;
+      animation: fadeUp 1s ease 1.2s both;
+    }
+
+    #unlockBtn:hover { background: var(--rose); color: #faf7f2; }
+    #unlockBtn.visible { display: block; }
+
+    /* ── MAIN SITE ── */
+    #mainSite { display: none; }
+    #mainSite.revealed {
+      display: block;
+      animation: siteReveal 1s ease 0.6s both;
+    }
+
+    @keyframes siteReveal {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── PETALS ── */
+    .petal-bg { position: fixed; inset: 0; pointer-events: none; overflow: hidden; z-index: 0; }
+
+    .petal {
+      position: absolute;
+      border-radius: 50% 0 50% 0;
+      opacity: 0;
+      animation: drift linear infinite;
+    }
+
+    @keyframes drift {
+      0%   { transform: translateY(-60px) rotate(0deg); opacity: 0; }
+      5%   { opacity: 0.28; }
+      95%  { opacity: 0.12; }
+      100% { transform: translateY(110vh) rotate(540deg); opacity: 0; }
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(250,247,242,0.88);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--warm);
+      display: flex;
+      justify-content: center;
+      gap: 0.4rem;
+      padding: 0.7rem 1rem;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 0.4rem 1.1rem;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--mid);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .nav-btn:hover, .nav-btn.active { border-color: var(--rose); color: var(--rose); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      padding: 2rem;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 18% 28%, rgba(201,122,104,0.1) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 82% 72%, rgba(232,196,176,0.13) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--rose);
+      margin-bottom: 1.8rem;
+      animation: fadeUp 0.8s ease 0.2s both;
+    }
+
+    .hero-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(4rem, 14vw, 10rem);
+      font-weight: 300;
+      line-height: 0.9;
+      letter-spacing: -0.02em;
+      animation: fadeUp 1s ease 0.4s both;
+    }
+
+    .hero-name span { display: block; font-style: italic; color: var(--rose); }
+
+    .hero-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      color: var(--mid);
+      margin-top: 1.4rem;
+      animation: fadeUp 1s ease 0.7s both;
+    }
+
+    .hero-btns {
+      display: flex;
+      gap: 0.9rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+      justify-content: center;
+      animation: fadeUp 1s ease 0.9s both;
+    }
+
+    .hero-btn {
+      padding: 0.7rem 1.8rem;
+      border: 1px solid var(--blush);
+      border-radius: 2px;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.72rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+
+    .hero-btn:hover { border-color: var(--rose); color: var(--rose); }
+    .hero-btn.primary { background: var(--rose); border-color: var(--rose); color: white; }
+    .hero-btn.primary:hover { background: #b5674d; border-color: #b5674d; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── SECTIONS ── */
+    .page-section { max-width: 900px; margin: 0 auto; padding: 6rem 2rem; position: relative; z-index: 1; }
+
+    .section-label { font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--rose); margin-bottom: 1rem; }
+
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      margin-bottom: 0.6rem;
+    }
+
+    .section-desc { color: var(--mid); font-size: 0.9rem; margin-bottom: 3rem; }
+
+    .divider { width: 60px; height: 1px; background: var(--blush); margin: 0 auto; }
+
+    /* ── LETTER ── */
+    .letter-wrap { border-left: 1px solid var(--blush); padding-left: 2.5rem; }
+
+    .letter-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.15rem, 3vw, 1.55rem);
+      line-height: 1.9;
+      color: var(--mid);
+      font-style: italic;
+    }
+
+    .letter-body p + p { margin-top: 1.5em; }
+
+    .letter-sig { margin-top: 2.5rem; font-family: 'Cormorant Garamond', serif; font-size: 1.4rem; color: var(--deep); }
+
+    /* ── PHOTOS ── */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    @media (max-width: 580px) { .photo-grid { grid-template-columns: 1fr 1fr; } }
+
+    .photo-slot {
+      aspect-ratio: 3/4;
+      background: var(--warm);
+      border: 1px dashed var(--blush);
+      border-radius: 4px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.3s, background 0.3s;
+    }
+
+    .photo-slot:hover { border-color: var(--rose); background: #ede5db; }
+
+    .photo-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; border-radius: 3px; }
+    .photo-slot input[type="file"] { position: absolute; inset: 0; opacity: 0; cursor: pointer; }
+    .photo-icon { width: 26px; height: 26px; opacity: 0.28; pointer-events: none; }
+    .photo-label { font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); pointer-events: none; }
+    .photo-hint { margin-top: 1.2rem; font-size: 0.74rem; color: var(--muted); letter-spacing: 0.08em; text-align: center; }
+
+    /* ── QUIZ ── */
+    .quiz-card {
+      background: white;
+      border: 1px solid var(--warm);
+      border-radius: 8px;
+      padding: 2.5rem 2rem;
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: left;
+    }
+
+    .q-counter { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-bottom: 0.75rem; }
+
+    .q-progress { height: 2px; background: var(--warm); border-radius: 1px; margin-bottom: 1.8rem; overflow: hidden; }
+    .q-progress-bar { height: 100%; background: var(--rose); border-radius: 1px; transition: width 0.4s ease; }
+
+    .q-text { font-family: 'Cormorant Garamond', serif; font-size: 1.55rem; color: var(--deep); margin-bottom: 1.5rem; line-height: 1.4; }
+
+    .q-options { display: flex; flex-direction: column; gap: 10px; }
+
+    .q-opt {
+      padding: 0.8rem 1.1rem;
+      border: 1px solid var(--blush);
+      border-radius: 4px;
+      background: transparent;
+      text-align: left;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.88rem;
+      font-weight: 300;
+      color: var(--deep);
+      cursor: pointer;
+      transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .q-opt-letter {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid var(--blush);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.68rem;
+      flex-shrink: 0;
+      transition: all 0.2s;
+    }
+
+    .q-opt:hover:not(:disabled) { background: var(--warm); border-color: var(--rose); }
+    .q-opt:hover:not(:disabled) .q-opt-letter { border-color: var(--rose); color: var(--rose); }
+    .q-opt.correct { background: #edf7ed; border-color: #7ab87a; }
+    .q-opt.correct .q-opt-letter { background: #7ab87a; border-color: #7ab87a; color: white; }
+    .q-opt.wrong { background: #f7eded; border-color: #c07a7a; }
+    .q-opt.wrong .q-opt-letter { background: #c07a7a; border-color: #c07a7a; color: white; }
+    .q-opt:disabled { cursor: default; }
+
+    .q-result { margin-top: 1.2rem; font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.05rem; color: var(--mid); min-height: 1.5rem; }
+
+    .q-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 2rem; gap: 1rem; }
+
+    .btn {
+      padding: 0.6rem 1.5rem;
+      border: 1px solid var(--rose);
+      border-radius: 2px;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.76rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: var(--rose);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn:hover { background: var(--rose); color: white; }
+    .btn:disabled { opacity: 0.22; cursor: default; pointer-events: none; }
+    .btn.filled { background: var(--rose); color: white; }
+    .btn.filled:hover { background: #b5674d; border-color: #b5674d; }
+
+    .score-view { display: none; flex-direction: column; align-items: center; gap: 1rem; padding: 1rem 0; text-align: center; }
+    .score-view.visible { display: flex; }
+
+    .score-num { font-family: 'Cormorant Garamond', serif; font-size: 5.5rem; font-weight: 300; color: var(--rose); line-height: 1; }
+    .score-msg { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.4rem; color: var(--mid); }
+
+    /* ── REVEAL ── */
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.9s ease, transform 0.9s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem 4rem;
+      font-size: 0.7rem;
+      letter-spacing: 0.18em;
+      color: var(--muted);
+      border-top: 1px solid var(--warm);
+      position: relative;
+      z-index: 1;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ════════ LOCK SCREEN ════════ -->
+<div id="lockScreen">
+  <div class="lock-petals" id="lockPetals"></div>
+  <p class="lock-eyebrow">Something special is waiting for you</p>
+  <h1 class="lock-name">April<span>Joy</span></h1>
+  <p class="lock-sub">Opens on your birthday ✦</p>
+
+  <div class="lock-countdown" id="lockCd">
+    <div class="lc-unit"><span class="lc-num" id="lDays">--</span><span class="lc-label">Days</span></div>
+    <div class="lc-dot">·</div>
+    <div class="lc-unit"><span class="lc-num" id="lHours">--</span><span class="lc-label">Hours</span></div>
+    <div class="lc-dot">·</div>
+    <div class="lc-unit"><span class="lc-num" id="lMins">--</span><span class="lc-label">Minutes</span></div>
+    <div class="lc-dot">·</div>
+    <div class="lc-unit"><span class="lc-num" id="lSecs">--</span><span class="lc-label">Seconds</span></div>
+  </div>
+
+  <p class="lock-hint" id="lockHint">Come back on April 11 🌹</p>
+  <button id="unlockBtn" onclick="doUnlock()">Open your gift →</button>
+</div>
+
+<!-- ════════ MAIN SITE ════════ -->
+<div id="mainSite">
+  <div class="petal-bg" id="petalBg"></div>
+
+  <!-- NAV -->
+  <nav>
+    <button class="nav-btn" onclick="goTo('hero')">Home</button>
+    <button class="nav-btn" onclick="goTo('letter')">Letter</button>
+    <button class="nav-btn" onclick="goTo('photos')">Photos</button>
+    <button class="nav-btn" onclick="goTo('quiz')">Quiz</button>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero" id="hero">
+    <p class="eyebrow">Happy Birthday, my love</p>
+    <h1 class="hero-name">April<span>Joy</span></h1>
+    <p class="hero-sub">Today is entirely yours ✦</p>
+    <div class="hero-btns">
+      <button class="hero-btn primary" onclick="goTo('letter')">Read my letter</button>
+      <button class="hero-btn" onclick="goTo('photos')">Our memories</button>
+      <button class="hero-btn" onclick="goTo('quiz')">Take the quiz</button>
+    </div>
+  </div>
+
+  <!-- LETTER -->
+  <section class="page-section" id="letter">
+    <div class="reveal letter-wrap">
+      <p class="section-label">A message for you</p>
+      <div class="letter-body">
+        <p>
+          <!-- ✏️ EDIT YOUR MESSAGE HERE — replace this text -->
+          Dear April Joy, today we celebrate you — your laughter, your warmth, and every little moment that makes you extraordinary. This page was made with love, just for you.
+        </p>
+        <p>
+          <!-- ✏️ Add a second paragraph here -->
+          On this special day, I want you to know how deeply you are loved and cherished. Happy Birthday, my love.
+        </p>
+      </div>
+      <div class="letter-sig">— With all my love 🌹</div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- PHOTOS -->
+  <section class="page-section" id="photos">
+    <div class="reveal" style="text-align:center">
+      <p class="section-label">Our memories</p>
+      <h2 class="section-title">Moments with you</h2>
+      <p class="section-desc">Six frames — just for us</p>
+      <div class="photo-grid" id="photoGrid"></div>
+      <p class="photo-hint">Click any frame to add a photo</p>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- QUIZ -->
+  <section class="page-section" id="quiz">
+    <div class="reveal" style="text-align:center">
+      <p class="section-label">How well do you know us?</p>
+      <h2 class="section-title">Our little quiz</h2>
+      <p class="section-desc">Five questions — no peeking!</p>
+
+      <div class="quiz-card">
+        <div id="questionView">
+          <p class="q-counter" id="qCounter">Question 1 of 5</p>
+          <div class="q-progress"><div class="q-progress-bar" id="qBar" style="width:20%"></div></div>
+          <p class="q-text" id="qText"></p>
+          <div class="q-options" id="qOptions"></div>
+          <p class="q-result" id="qResult"></p>
+          <div class="q-nav">
+            <button class="btn" id="prevBtn" onclick="changeQ(-1)" disabled>← Prev</button>
+            <button class="btn filled" id="nextBtn" onclick="changeQ(1)">Next →</button>
+          </div>
+        </div>
+
+        <div class="score-view" id="scoreView">
+          <div class="score-num" id="scoreNum">0/5</div>
+          <p class="score-msg" id="scoreMsg"></p>
+          <button class="btn filled" style="margin-top:0.5rem" onclick="resetQuiz()">Play again</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>Made with love ✦ Just for April Joy &nbsp;·&nbsp; April 11</footer>
+</div>
+
+<script>
+/* ── BIRTHDAY: April 11 ── */
+function getBirthday() {
+  const now = new Date();
+  let b = new Date(now.getFullYear(), 3, 11, 0, 0, 0);
+  if (b < now && !(now.getMonth() === 3 && now.getDate() === 11)) {
+    b.setFullYear(now.getFullYear() + 1);
+  }
+  return b;
+}
+
+function isToday() {
+  const n = new Date();
+  return n.getMonth() === 3 && n.getDate() === 11;
+}
+
+/* ── LOCK PETALS ── */
+(function () {
+  const wrap = document.getElementById('lockPetals');
+  const cols = ['#3d2018','#5a2e20','#7a3e2a','#4a2418','#6a3222'];
+  for (let i = 0; i < 16; i++) {
+    const p = document.createElement('div');
+    p.className = 'lock-petal';
+    const sz = 8 + Math.random() * 12;
+    p.style.cssText = `width:${sz}px;height:${sz*1.6}px;background:${cols[i%cols.length]};left:${Math.random()*100}%;animation-duration:${12+Math.random()*18}s;animation-delay:${Math.random()*14}s;`;
+    wrap.appendChild(p);
+  }
+})();
+
+/* ── LOCK TICK ── */
+function tickLock() {
+  if (isToday()) {
+    document.getElementById('lockCd').style.display = 'none';
+    document.getElementById('lockHint').style.display = 'none';
+    document.getElementById('unlockBtn').classList.add('visible');
+    return;
+  }
+  const diff = getBirthday() - new Date();
+  if (diff <= 0) return;
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  document.getElementById('lDays').textContent  = String(d).padStart(2,'0');
+  document.getElementById('lHours').textContent = String(h).padStart(2,'0');
+  document.getElementById('lMins').textContent  = String(m).padStart(2,'0');
+  document.getElementById('lSecs').textContent  = String(s).padStart(2,'0');
+}
+
+tickLock();
+setInterval(tickLock, 1000);
+
+/* ── UNLOCK ── */
+function doUnlock() {
+  document.getElementById('lockScreen').classList.add('unlocking');
+  document.getElementById('mainSite').classList.add('revealed');
+  setTimeout(() => { document.getElementById('lockScreen').style.display = 'none'; }, 1400);
+  spawnPetals();
+  initQuiz();
+  initReveal();
+}
+
+/* ── MAIN PETALS ── */
+function spawnPetals() {
+  const wrap = document.getElementById('petalBg');
+  const cols = ['#e8c4b0','#f0d8cc','#c97a68','#d4a896','#f0e2d8'];
+  for (let i = 0; i < 22; i++) {
+    const p = document.createElement('div');
+    p.className = 'petal';
+    const sz = 8 + Math.random() * 14;
+    p.style.cssText = `width:${sz}px;height:${sz*1.6}px;background:${cols[i%cols.length]};left:${Math.random()*100}%;animation-duration:${10+Math.random()*20}s;animation-delay:${Math.random()*16}s;`;
+    wrap.appendChild(p);
+  }
+}
+
+/* ── NAV + SCROLL ── */
+function goTo(id) { document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' }); }
+
+function initReveal() {
+  const io = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  const navBtns = document.querySelectorAll('.nav-btn');
+  const secs = ['hero','letter','photos','quiz'];
+  window.addEventListener('scroll', () => {
+    let cur = 'hero';
+    secs.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && window.scrollY >= el.offsetTop - 130) cur = id;
+    });
+    navBtns.forEach(b => {
+      const label = b.textContent.trim().toLowerCase();
+      b.classList.toggle('active',
+        label === cur || (cur === 'hero' && label === 'home')
+      );
+    });
+  });
+}
+
+/* ── PHOTOS ── */
+(function () {
+  const grid = document.getElementById('photoGrid');
+  for (let i = 0; i < 6; i++) {
+    const slot = document.createElement('div');
+    slot.className = 'photo-slot';
+    slot.innerHTML = `
+      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+        <rect x="3" y="3" width="18" height="18" rx="2"/>
+        <circle cx="8.5" cy="8.5" r="1.5"/>
+        <path d="M21 15l-5-5L5 21"/>
+      </svg>
+      <span class="photo-label">Add photo</span>
+      <input type="file" accept="image/*" />
+    `;
+    const inp = slot.querySelector('input');
+    inp.addEventListener('change', function () {
+      if (!this.files[0]) return;
+      const img = document.createElement('img');
+      img.src = URL.createObjectURL(this.files[0]);
+      slot.querySelectorAll('.photo-icon,.photo-label').forEach(el => el.remove());
+      slot.insertBefore(img, inp);
+    });
+    grid.appendChild(slot);
+  }
+})();
+
+/* ── QUIZ ── */
+// ✏️  Edit questions, options, and the correct index (0-3) below
+const questions = [
+  {
+    q: "Where did we go on our very first date?",
+    options: ["A coffee shop", "A park", "A restaurant", "A movie"],
+    correct: 0,
+    comment: "That's right! 🌹"
+  },
+  {
+    q: "What is my favourite thing about you?",
+    options: ["Your smile", "Your laugh", "Your kindness", "All of the above"],
+    correct: 3,
+    comment: "Obviously — all of the above!"
+  },
+  {
+    q: "What is our favourite thing to do together?",
+    options: ["Watch movies", "Cook together", "Go on walks", "Just talk"],
+    correct: 2,
+    comment: "Yes! Those walks are everything."
+  },
+  {
+    q: "What was the first song we called 'ours'?",
+    options: ["I remember it well", "Hmm, let me think…", "Something beautiful", "A love song"],
+    correct: 0,
+    comment: "You remembered! 🎶"
+  },
+  {
+    q: "How many times have I told you I love you today?",
+    options: ["Not enough", "A hundred times", "Always", "Never enough"],
+    correct: 3,
+    comment: "Never, ever enough."
+  },
+];
+
+let cur = 0, score = 0;
+let answered = new Array(questions.length).fill(null);
+const letters = ['A','B','C','D'];
+
+function initQuiz() { renderQ(); }
+
+function renderQ() {
+  const q = questions[cur];
+  document.getElementById('qCounter').textContent = `Question ${cur+1} of ${questions.length}`;
+  document.getElementById('qBar').style.width = `${((cur+1)/questions.length)*100}%`;
+  document.getElementById('qText').textContent = q.q;
+  document.getElementById('qResult').textContent = '';
+
+  const opts = document.getElementById('qOptions');
+  opts.innerHTML = '';
+  q.options.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'q-opt';
+    btn.innerHTML = `<span class="q-opt-letter">${letters[i]}</span>${opt}`;
+    if (answered[cur] !== null) {
+      btn.disabled = true;
+      if (i === q.correct) btn.classList.add('correct');
+      else if (i === answered[cur]) btn.classList.add('wrong');
+      document.getElementById('qResult').textContent =
+        answered[cur] === q.correct ? q.comment : "Not quite — but you're still my favourite.";
+    }
+    btn.onclick = function () {
+      if (answered[cur] !== null) return;
+      answered[cur] = i;
+      if (i === q.correct) score++;
+      opts.querySelectorAll('.q-opt').forEach((b, j) => {
+        b.disabled = true;
+        if (j === q.correct) b.classList.add('correct');
+        else if (j === i) b.classList.add('wrong');
+      });
+      document.getElementById('qResult').textContent =
+        i === q.correct ? q.comment : "Not quite — but you're still my favourite.";
+    };
+    opts.appendChild(btn);
+  });
+
+  document.getElementById('prevBtn').disabled = cur === 0;
+  document.getElementById('nextBtn').textContent = cur === questions.length - 1 ? 'See results →' : 'Next →';
+}
+
+function changeQ(dir) {
+  if (dir === 1 && cur === questions.length - 1) { showScore(); return; }
+  cur = Math.max(0, Math.min(questions.length - 1, cur + dir));
+  renderQ();
+}
+
+function showScore() {
+  document.getElementById('questionView').style.display = 'none';
+  document.getElementById('scoreView').classList.add('visible');
+  document.getElementById('scoreNum').textContent = `${score}/${questions.length}`;
+  const msgs = [
+    "You tried, and that's adorable.",
+    "Keep learning about us!",
+    "Pretty good, my love!",
+    "You know us so well 🌹",
+    "Perfect score — just like you! 🎉"
+  ];
+  document.getElementById('scoreMsg').textContent = msgs[Math.min(score, msgs.length - 1)];
+}
+
+function resetQuiz() {
+  cur = 0; score = 0; answered = new Array(questions.length).fill(null);
+  document.getElementById('scoreView').classList.remove('visible');
+  document.getElementById('questionView').style.display = '';
+  renderQ();
+}
+</script>
+</body>
+</html>
