@@ -699,28 +699,57 @@ function initReveal() {
 /* ── PHOTOS ── */
 (function () {
   const grid = document.getElementById('photoGrid');
-  for (let i = 0; i < 6; i++) {
+  myPhotos.forEach((filename) => {
     const slot = document.createElement('div');
     slot.className = 'photo-slot';
-    slot.innerHTML = `
-      <svg class="photo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-        <rect x="3" y="3" width="18" height="18" rx="2"/>
-        <circle cx="8.5" cy="8.5" r="1.5"/>
-        <path d="M21 15l-5-5L5 21"/>
-      </svg>
-      <span class="photo-label">Add photo</span>
-      <input type="file" accept="image/*" />
-    `;
+ 
+    if (filename) {
+      // pre-loaded photo from GitHub
+      slot.innerHTML = `
+        <img src="${filename}" alt="our memory" />
+        <div class="photo-overlay">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0e4da" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+          <span>Change photo</span>
+        </div>
+        <input type="file" accept="image/*" />
+      `;
+    } else {
+      // empty slot — she can add her own
+      slot.innerHTML = `
+        <svg class="photo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <circle cx="8.5" cy="8.5" r="1.5"/>
+          <path d="M21 15l-5-5L5 21"/>
+        </svg>
+        <span class="photo-label">Add photo</span>
+        <input type="file" accept="image/*" />
+      `;
+    }
+ 
     const inp = slot.querySelector('input');
     inp.addEventListener('change', function () {
       if (!this.files[0]) return;
+      const url = URL.createObjectURL(this.files[0]);
+      // remove existing img if any
+      const existingImg = slot.querySelector('img');
+      if (existingImg) existingImg.remove();
+      // add new image
       const img = document.createElement('img');
-      img.src = URL.createObjectURL(this.files[0]);
-      slot.querySelectorAll('.photo-icon,.photo-label').forEach(el => el.remove());
+      img.src = url;
       slot.insertBefore(img, inp);
+      // add overlay if not already there
+      if (!slot.querySelector('.photo-overlay')) {
+        const ov = document.createElement('div');
+        ov.className = 'photo-overlay';
+        ov.innerHTML = `<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#f0e4da" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg><span>Change photo</span>`;
+        slot.insertBefore(ov, inp);
+      }
+      // hide empty slot icons
+      slot.querySelectorAll('.photo-icon,.photo-label').forEach(el => el.remove());
     });
+ 
     grid.appendChild(slot);
-  }
+  });
 })();
 
 /* ── QUIZ ── */
