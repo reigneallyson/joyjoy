@@ -590,8 +590,8 @@
 /* ── BIRTHDAY: April 11 ── */
 function getBirthday() {
   const now = new Date();
-  let b = new Date(now.getFullYear(), 3, 10, 0, 0, 0);
-  if (b < now && !(now.getMonth() === 3 && now.getDate() === 10)) {
+  let b = new Date(now.getFullYear(), 3, 11, 0, 0, 0);
+  if (b < now && !(now.getMonth() === 3 && now.getDate() === 11)) {
     b.setFullYear(now.getFullYear() + 1);
   }
   return b;
@@ -599,7 +599,7 @@ function getBirthday() {
 
 function isToday() {
   const n = new Date();
-  return n.getMonth() === 3 && n.getDate() === 10;
+  return n.getMonth() === 3 && n.getDate() === 11;
 }
 
 /* ── LOCK PETALS ── */
